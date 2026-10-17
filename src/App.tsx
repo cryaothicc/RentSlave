@@ -672,8 +672,8 @@ export default function App() {
             {/* Charts */}
             <div className="bg-zinc-900 rounded-xl border border-zinc-800 p-5">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
-                <div className="text-sm font-semibold text-white">10-Year Trajectory</div>
-                <div className="flex flex-wrap gap-1.5">
+                <div className="text-sm font-semibold text-white shrink-0">10-Year Trajectory</div>
+                <div className="flex gap-1.5 overflow-x-auto pb-0.5 scrollbar-none">
                   {[
                     { id: 'wealth', label: 'Net Wealth' },
                     { id: 'unrecoverable', label: 'Sunk Costs' },
@@ -681,7 +681,7 @@ export default function App() {
                     { id: 'equity', label: 'Property & Loan' },
                   ].map((tab) => (
                     <button key={tab.id} onClick={() => setActiveChartTab(tab.id as typeof activeChartTab)}
-                      className={`px-3 py-1.5 rounded text-xs font-medium border transition-colors ${activeChartTab === tab.id ? 'border-zinc-400 text-white bg-zinc-800' : 'border-zinc-700 text-zinc-400 hover:text-white'}`}>
+                      className={`px-3 py-1.5 rounded text-xs font-medium border transition-colors whitespace-nowrap shrink-0 ${activeChartTab === tab.id ? 'border-zinc-400 text-white bg-zinc-800' : 'border-zinc-700 text-zinc-400 hover:text-white'}`}>
                       {tab.label}
                     </button>
                   ))}
@@ -749,11 +749,11 @@ export default function App() {
               {/* Year Inspector */}
               <div className="mt-5 pt-4 border-t border-zinc-800">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs text-zinc-400">Year {selectedYear} breakdown</span>
-                  <div className="flex gap-1">
+                  <span className="text-xs text-zinc-400 shrink-0">Year {selectedYear} breakdown</span>
+                  <div className="flex gap-1 overflow-x-auto pb-0.5 scrollbar-none ml-2">
                     {[1,2,3,4,5,6,7,8,9,10].map((yr) => (
                       <button key={yr} onClick={() => setSelectedYear(yr)}
-                        className={`w-7 h-7 rounded text-xs font-medium transition-colors ${selectedYear === yr ? 'bg-zinc-700 text-white' : 'text-zinc-500 hover:text-white'}`}>
+                        className={`w-7 h-7 rounded text-xs font-medium transition-colors shrink-0 ${selectedYear === yr ? 'bg-zinc-700 text-white' : 'text-zinc-500 hover:text-white'}`}>
                         {yr}
                       </button>
                     ))}
@@ -834,11 +834,11 @@ export default function App() {
 
             {/* How This Works */}
             <div className="bg-zinc-900 rounded-xl border border-zinc-800 p-6 flex-1 flex flex-col">
-              <div className="text-[11px] font-semibold uppercase tracking-widest text-zinc-500 mb-4">How This Works</div>
+              <div className="text-[11px] font-semibold uppercase tracking-widest text-zinc-500 mb-6">How This Works</div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-zinc-400 leading-relaxed flex-1">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs text-zinc-400 leading-relaxed flex-1">
 
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-6">
                   <div>
                     <div className="text-zinc-200 font-semibold mb-1">The core question</div>
                     <p>Should you buy a property or rent and invest the difference? This simulator runs a 10-year month-by-month model of both scenarios using real Philippine costs — then compares the net wealth of each path at every year.</p>
@@ -860,10 +860,10 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-6">
                   <div>
                     <div className="text-zinc-200 font-semibold mb-1">Philippine-specific costs modeled</div>
-                    <ul className="space-y-2">
+                    <ul className="space-y-3">
                       {[
                         ['Pag-IBIG / Bank / In-House', 'Three financing channels with realistic Philippine interest rates and caps (Pag-IBIG is capped at ₱6M).'],
                         ['Amilyar (RPT)', 'Real Property Tax billed annually by the LGU, typically 0.4%–0.8% of market value.'],
@@ -885,11 +885,12 @@ export default function App() {
                     <p>All projections assume constant annual appreciation and rent escalation rates. Interest rates are fixed for the full term — repricing risk is not modeled. Tax rules are based on standard BIR guidelines for individual buyers. Results are estimates for comparison purposes only and should not be taken as financial advice.</p>
                   </div>
 
-                  <div className="mt-auto pt-4 border-t border-zinc-800">
-                    <p className="text-zinc-600 text-[11px]">This tool is for educational and planning purposes only. Consult a licensed real estate broker, financial advisor, or Pag-IBIG/bank officer before making any property decisions.</p>
-                  </div>
                 </div>
 
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-zinc-800">
+                <p className="text-zinc-600 text-[11px]">This tool is for educational and planning purposes only. Consult a licensed real estate broker, financial advisor, or Pag-IBIG/bank officer before making any property decisions.</p>
               </div>
             </div>
 
