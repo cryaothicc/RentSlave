@@ -471,7 +471,7 @@ export default function App() {
       </header>
 
       <main className="max-w-screen-2xl mx-auto px-6 py-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:items-stretch">
 
           {/* ── LEFT PANEL ── */}
           <div className="lg:col-span-4 space-y-4">
@@ -622,7 +622,7 @@ export default function App() {
           </div>
 
           {/* ── RIGHT PANEL ── */}
-          <div className="lg:col-span-8 space-y-5">
+          <div className="lg:col-span-8 flex flex-col gap-5">
 
             {/* Verdict */}
             <div className="bg-zinc-900 rounded-xl border border-zinc-800 p-5">
@@ -833,12 +833,12 @@ export default function App() {
             </div>
 
             {/* How This Works */}
-            <div className="bg-zinc-900 rounded-xl border border-zinc-800 p-6">
+            <div className="bg-zinc-900 rounded-xl border border-zinc-800 p-6 flex-1 flex flex-col">
               <div className="text-[11px] font-semibold uppercase tracking-widest text-zinc-500 mb-4">How This Works</div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-zinc-400 leading-relaxed">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-zinc-400 leading-relaxed flex-1">
 
-                <div className="space-y-4">
+                <div className="flex flex-col gap-4">
                   <div>
                     <div className="text-zinc-200 font-semibold mb-1">The core question</div>
                     <p>Should you buy a property or rent and invest the difference? This simulator runs a 10-year month-by-month model of both scenarios using real Philippine costs — then compares the net wealth of each path at every year.</p>
@@ -853,12 +853,17 @@ export default function App() {
                     <div className="text-zinc-200 font-semibold mb-1">The renter's path</div>
                     <p>The renter takes the exact same cash the buyer spent on Day 1 (down payment + closing costs) and invests it. Each month, if the buyer's total outflow is higher than the rent, that difference is also invested. The renter's net wealth is the compounding investment portfolio.</p>
                   </div>
+
+                  <div>
+                    <div className="text-zinc-200 font-semibold mb-1">What "break-even" means</div>
+                    <p>The break-even year is when the buyer's net wealth first exceeds the renter's portfolio. Before that year, renting and investing wins. After it, buying wins. If no break-even is shown, the renter stays ahead through Year 10 under the current assumptions.</p>
+                  </div>
                 </div>
 
-                <div className="space-y-4">
+                <div className="flex flex-col gap-4">
                   <div>
                     <div className="text-zinc-200 font-semibold mb-1">Philippine-specific costs modeled</div>
-                    <ul className="space-y-1">
+                    <ul className="space-y-2">
                       {[
                         ['Pag-IBIG / Bank / In-House', 'Three financing channels with realistic Philippine interest rates and caps (Pag-IBIG is capped at ₱6M).'],
                         ['Amilyar (RPT)', 'Real Property Tax billed annually by the LGU, typically 0.4%–0.8% of market value.'],
@@ -868,7 +873,7 @@ export default function App() {
                         ['Stretched DP', 'Pre-selling condos often let buyers pay the down payment in 12 or 24 monthly installments before the loan kicks in.'],
                       ].map(([term, desc]) => (
                         <li key={term} className="flex gap-2">
-                          <span className="text-zinc-500 shrink-0">—</span>
+                          <span className="text-zinc-600 shrink-0">—</span>
                           <span><span className="text-zinc-300">{term}:</span> {desc}</span>
                         </li>
                       ))}
@@ -876,8 +881,12 @@ export default function App() {
                   </div>
 
                   <div>
-                    <div className="text-zinc-200 font-semibold mb-1">What "break-even" means</div>
-                    <p>The break-even year is when the buyer's net wealth first exceeds the renter's portfolio. Before that year, renting and investing wins. After it, buying wins. If no break-even is shown, the renter stays ahead for the full 10 years under the current assumptions.</p>
+                    <div className="text-zinc-200 font-semibold mb-1">Assumptions & limitations</div>
+                    <p>All projections assume constant annual appreciation and rent escalation rates. Interest rates are fixed for the full term — repricing risk is not modeled. Tax rules are based on standard BIR guidelines for individual buyers. Results are estimates for comparison purposes only and should not be taken as financial advice.</p>
+                  </div>
+
+                  <div className="mt-auto pt-4 border-t border-zinc-800">
+                    <p className="text-zinc-600 text-[11px]">This tool is for educational and planning purposes only. Consult a licensed real estate broker, financial advisor, or Pag-IBIG/bank officer before making any property decisions.</p>
                   </div>
                 </div>
 
