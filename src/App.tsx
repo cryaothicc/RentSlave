@@ -291,13 +291,25 @@ export default function App() {
     let cumTaxSavings = 0, cumInterest = 0, cumPrincipal = 0, cumRPT = 0, cumHOA = 0, cumMRI = 0;
 
     const effectiveSellPct = includeSellingCosts ? sellingClosingCostsPct : 0;
-    const yearlyData: ReturnType<typeof buildRow>[] = [];
+    const yearlyData: Array<{
+      year: number;
+      homeValue: number; loanBalance: number; homeEquityGross: number;
+      sellingCosts: number; netHomeEquity: number; buyerSidePortfolio: number;
+      buyerNetWealth: number; renterNetWealth: number; wealthAdvantageBuyer: number;
+      annualMortgagePI: number; annualInterest: number; annualPrincipal: number;
+      annualRPT: number; annualHOA: number; annualMRIFire: number; annualMaintenance: number;
+      annualTaxSavings: number; annualBuyerNetOutflow: number; annualRenterOutflow: number;
+      monthlyBuyerAvg: number; monthlyRenterAvg: number;
+      cumulativeBuyerUnrecoverable: number; cumulativeRenterUnrecoverable: number;
+      cumulativeBuyerCashOutflow: number; cumulativeRenterCashOutflow: number;
+      cumulativeTaxSavings: number;
+    }> = [];
 
-    function buildRow(year: number, data: Record<string, number>) { return { year, ...data }; }
 
     const y0SellCosts = homePrice * (effectiveSellPct / 100);
     const y0PaidEquity = isStretched ? 0 : totalDP;
-    yearlyData.push(buildRow(0, {
+    yearlyData.push({
+      year: 0,
       homeValue: Math.round(homePrice),
       loanBalance: Math.round(loanAmount),
       homeEquityGross: Math.round(y0PaidEquity),
@@ -317,7 +329,7 @@ export default function App() {
       cumulativeBuyerCashOutflow: Math.round(upfrontCash),
       cumulativeRenterCashOutflow: 0,
       cumulativeTaxSavings: 0,
-    }));
+    });
 
     let breakEvenYear: number | null = null;
     let paidDPSoFar = isStretched ? 0 : totalDP;
@@ -384,7 +396,8 @@ export default function App() {
 
       if (breakEvenYear === null && advantage >= 0) breakEvenYear = year;
 
-      yearlyData.push(buildRow(year, {
+      yearlyData.push({
+        year,
         homeValue: Math.round(endHomeVal),
         loanBalance: Math.round(remainingBalance),
         homeEquityGross: Math.round(grossEquity),
@@ -411,7 +424,7 @@ export default function App() {
         cumulativeBuyerCashOutflow: Math.round(cumBuyerCashOut),
         cumulativeRenterCashOutflow: Math.round(cumRenterCashOut),
         cumulativeTaxSavings: Math.round(cumTaxSavings),
-      }));
+      });
     }
 
     const year10 = yearlyData[10];
