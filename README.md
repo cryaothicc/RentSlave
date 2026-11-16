@@ -4,6 +4,8 @@ Compare renting and buying a home in the Philippines. Adjust assumptions such as
 
 The results are illustrative and depend on the values you enter.
 
+[Open RentSlave on GitHub Pages](https://cryaothicc.github.io/RentSlave/)
+
 ## Run locally
 
 ```sh
